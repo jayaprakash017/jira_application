@@ -1,12 +1,16 @@
 import asyncio
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.prebuilt import create_react_agent
-from langchain_ollama import ChatOllama  
+from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
+OPEN_AI_MODEL = os.getenv("OPEN_AI_MODEL")
+OPENAI_TEMPERATURE = float(os.getenv("OPENAI_TEMPERATURE"))
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+INFERENCE_SERVER_URL = os.getenv("INFERENCE_SERVER_URL")
 
 
 async def test_via_boards():
@@ -31,8 +35,11 @@ async def test_via_boards():
         print(f"Available tools: {[tool.name for tool in tools]}\n")
 
 
-        llm = ChatOllama(
-            model="qwen3:latest"
+        llm = ChatOpenAI(model=OPEN_AI_MODEL,
+                        temperature=OPENAI_TEMPERATURE,
+                        api_key=OPENAI_API_KEY,
+                        base_url=INFERENCE_SERVER_URL
+
         )
 
         agent = create_react_agent(llm, tools=tools)

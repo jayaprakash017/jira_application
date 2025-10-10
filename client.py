@@ -35,7 +35,7 @@ async def test_via_boards():
     
     try:
         tools = await client.get_tools()
-        #print(f"Available tools: {[tool.name for tool in tools]}\n")
+        print(f"Available tools: {[tool.name for tool in tools]}\n")
 
         llm = ChatGoogleGenerativeAI(
             model="gemini-2.0-flash",

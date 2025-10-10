@@ -1,6 +1,7 @@
 langchain-mcp-adapters
 langgraph
 langchain-google-genai
+langchain-ollama
 langchain
 python-dotenv
 mcp

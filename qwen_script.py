@@ -1,18 +1,13 @@
 import asyncio
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.prebuilt import create_react_agent
-# Remove Gemini import
-# from langchain_google_genai import ChatGoogleGenerativeAI
-
-# Add Ollama import
-from langchain_ollama import ChatOllama  # ✅ New import
+from langchain_ollama import ChatOllama  
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-# No need for GEMINI_API_KEY anymore
-# gemini_key = os.getenv("GEMINI_API_KEY")
+
 
 async def test_via_boards():
     print("Listing JIRA Projects via Agile Boards...")
@@ -23,16 +18,10 @@ async def test_via_boards():
                 "run",
                 "-i",
                 "--rm",
-                "-e", "JIRA_URL",
-                "-e", "JIRA_USERNAME", 
-                "-e", "JIRA_API_TOKEN",
+                "--env-file",
+                "/home/bhanu/Documents/jira_mcp/.env",
                 "mcp/atlassian"
             ],
-            "env": {
-                "JIRA_URL": "https://bhanuprakashch.atlassian.net",
-                "JIRA_USERNAME": "bhanuprakashchegondi@gmail.com",
-                "JIRA_API_TOKEN": "ATATT3xFfGF06zMW1R4KCD5XTo3OaT4U1llCVruDywzZkMl6b73vbuvnv6RXF41dJMu_9BlkRwY1E-WKfYrlE2j2CzVGA4OSKceJlsNdaCMiJF2yalXo5SkMahlgvKqLgUryWiwbHFOxPJA-kIqsTQ2HqFPtlm6CVgpARcWn0XyhxDNTUmlIbQc=0CA1984D"
-            },
             "transport": "stdio"
         }
     })
@@ -43,7 +32,7 @@ async def test_via_boards():
 
 
         llm = ChatOllama(
-            model="qwen3:latest"   
+            model="qwen3:latest"
         )
 
         agent = create_react_agent(llm, tools=tools)

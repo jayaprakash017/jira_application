@@ -42,6 +42,7 @@ async def interactive_jira_agent():
             temperature=0.3  
         )
         agent = create_react_agent(llm, tools=tools)
+        
 
         # Start conversation loop
         messages = []

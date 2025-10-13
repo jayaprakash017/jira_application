@@ -45,8 +45,8 @@ async def test_via_boards():
         agent = create_react_agent(llm, tools=tools)
 
         response = await agent.ainvoke(
-            {"messages": [{"role": "user", "content": """List all tickets assigned to me, including their summaries, current statuses and priority."""}]}
-        )
+    {"messages": [{"role": "user", "content": """list all the tickets assigned to me including their current status and priorities."""}]}
+)
 
         print("\n" + "="*50)
         print("Response:", response["messages"][-1].content)

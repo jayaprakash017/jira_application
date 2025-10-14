@@ -211,14 +211,6 @@ Remember: Be helpful, use the right tools, and guide users through proper workfl
         import traceback
         traceback.print_exc()
         return False
-    
-    finally:
-        # Ensure the client is properly closed even if an error occurs
-        try:
-            print("\nClosing MCP client...")
-            # MultiServerMCPClient doesn't have a close method, it will clean up automatically
-        except Exception as close_error:
-            print(f"Error closing client: {close_error}")
 
 
 async def main():
